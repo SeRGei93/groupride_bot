@@ -8,11 +8,10 @@ import (
 )
 
 type Database struct {
-	User      Repository.UserRepository
-	Event     Repository.EventRepository
-	UserEvent Repository.UserEventRepository
-	Gift      Repository.GiftRepository
-	File      Repository.FileRepository
+	User            Repository.UserRepository
+	Ride            Repository.RideRepository
+	File            Repository.FileRepository
+	RideParticipant Repository.RideParticipantRepository
 }
 
 func InitDatabase(dialector gorm.Dialector) Database {
@@ -22,10 +21,9 @@ func InitDatabase(dialector gorm.Dialector) Database {
 	}
 
 	return Database{
-		User:      *Repository.NewUserRepository(db).Init(),
-		Event:     *Repository.NewEventRepository(db).Init(),
-		UserEvent: *Repository.NewUserEventRepository(db).Init(),
-		Gift:      *Repository.NewGiftRepository(db).Init(),
-		File:      *Repository.NewFileRepository(db).Init(),
+		User:            *Repository.NewUserRepository(db).Init(),
+		Ride:            *Repository.NewRideRepository(db).Init(),
+		File:            *Repository.NewFileRepository(db).Init(),
+		RideParticipant: *Repository.NewRideParticipantRepository(db).Init(),
 	}
 }

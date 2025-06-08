@@ -18,21 +18,11 @@ func InitBot(cfg config.Bot) *tgbotapi.BotAPI {
 
 func SetLocalCommands(bot *tgbotapi.BotAPI, cfg config.Bot) error {
 	adminCommands := []tgbotapi.BotCommand{
-		{Command: "export_csv", Description: "Список участников"},
-		{Command: "export_gifts", Description: "Список подарков"},
-		{Command: "send_notify", Description: "Отправить сообщение всем участникам"},
+		//{Command: "export_csv", Description: "Список участников"},
+		//{Command: "send_notify", Description: "Отправить сообщение всем участникам"},
 	}
 
-	err := sendCommandRequest(bot, cfg.AdminChat, adminCommands)
-	if err != nil {
-		return err
-	}
-
-	publicCommands := []tgbotapi.BotCommand{
-		//{Command: "info", Description: "Инфо"},
-	}
-
-	err = sendCommandRequest(bot, cfg.PublicChat, publicCommands)
+	err := sendCommandRequest(bot, cfg.PublicChat, adminCommands)
 	if err != nil {
 		return err
 	}

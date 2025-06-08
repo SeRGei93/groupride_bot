@@ -23,9 +23,3 @@ func (r *FileRepository) CreateFile(tu table.File) error {
 	err := r.database.Create(&tu).Error
 	return err
 }
-
-func (r *FileRepository) FindFilesByEntityId(ids []uint) ([]table.File, error) {
-	var rows []table.File
-	err := r.database.Where("id IN = ?", ids).Find(&rows).Error
-	return rows, err
-}

@@ -12,13 +12,5 @@ func Commands(bot *tgbotapi.BotAPI, update tgbotapi.Update, db database.Database
 	switch update.Message.Command() {
 	case "start":
 		services.Start(bot, update, db, cfg)
-	case "export_csv":
-		services.ExportCsv(bot, update, db, cfg)
-	case "export_gifts":
-		services.ExportGifts(bot, update, db, cfg)
-	case "send_notify":
-		services.SendNotify(bot, update, db, cfg)
-	case "info":
-		services.Info(bot, update, db, cfg)
 	}
 }

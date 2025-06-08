@@ -19,17 +19,15 @@ type Bot struct {
 	UseWebhook    bool    `yaml:"use_webhook"`
 	WebhookURL    string  `yaml:"webhook_url"`
 	AdminUsers    []int64 `yaml:"admin_users"`
-	AdminChat     int64   `yaml:"admin_chat"`
+	BanUsers      []int64 `yaml:"ban_users"`
 	PublicChat    int64   `yaml:"public_chat"`
 }
 
 var (
-	MigrateFlag bool
-	PatchFlag   string
+	PatchFlag string
 )
 
 func MustLoad() *Config {
-	flag.BoolVar(&MigrateFlag, "migrate", false, "Run migrations")
 	flag.StringVar(&PatchFlag, "config", getEnv("CONFIG_PATH", ""), "config file path")
 	flag.Parse()
 
@@ -38,7 +36,6 @@ func MustLoad() *Config {
 		log.Fatal("CONFIG_PATH is not set")
 	}
 
-	// check if file exists
 	if _, err := os.Stat(configPath); os.IsNotExist(err) {
 		log.Fatalf("config file does not exist: %s", configPath)
 	}
