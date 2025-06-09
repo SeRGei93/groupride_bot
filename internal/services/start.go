@@ -23,7 +23,6 @@ func Start(bot *tgbotapi.BotAPI, update tgbotapi.Update, db database.Database, c
 	if err != nil && err != gorm.ErrRecordNotFound {
 		log.Fatalf("failed create new user: %s", err)
 		return
-
 	}
 
 	if err != nil && err == gorm.ErrRecordNotFound {
@@ -42,7 +41,7 @@ func Start(bot *tgbotapi.BotAPI, update tgbotapi.Update, db database.Database, c
 		}
 	}
 
-	text := "Привет. Я помогу тебе создать заезд в который ты пригласишь своих друзей" // нулевой символ
+	text := "👋 Привет! Я помогу тебе создать заезд, в который ты пригласишь своих друзей 🚴‍♀️🚴‍♂️"
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, text)
 	buttons, err := StartButtons(update.Message, db, cfg)

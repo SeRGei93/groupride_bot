@@ -14,6 +14,8 @@ func Callbacks(bot *tgbotapi.BotAPI, update tgbotapi.Update, db database.Databas
 	switch cmd {
 	case "create_ride":
 		ride.StartCreateRide(bot, update, db, cfg)
+	case "cancel":
+		ride.CancelCreateRide(bot, update, db, cfg)
 	default:
 		//msgType, id := utils.GetKeyValue(update.CallbackQuery.Data)
 		//services.Kamni200(bot, update, db, cfg, bike)

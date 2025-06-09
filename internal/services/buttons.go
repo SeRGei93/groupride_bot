@@ -13,22 +13,17 @@ func StartButtons(message *tgbotapi.Message, db database.Database, cfg config.Bo
 	userID := from.ID
 
 	result := tgbotapi.NewInlineKeyboardMarkup(
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("Создать заезд", "create_event")),
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonURL("Канал со всеми заездами", "http://t.me/grouprideminsk")),
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("Мои заезды", fmt.Sprintf("user_events:%d", userID))),
+		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("➕ Создать заезд", "create_ride")),
+		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonURL("🚴‍♂️ Канал со всеми заездами", "http://t.me/grouprideminsk")),
+		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("📋 Мои заезды", fmt.Sprintf("user_events:%d", userID))),
 	)
 
 	return &result, nil
 }
 
 func DisableButtons(message *tgbotapi.Message, db database.Database, cfg config.Bot) (*tgbotapi.InlineKeyboardMarkup, error) {
-	from := message.Chat
-	userID := from.ID
-
 	result := tgbotapi.NewInlineKeyboardMarkup(
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("Создать заезд", "create_event")),
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonURL("Канал со всеми заездами", "http://t.me/grouprideminsk")),
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("Мои заезды", fmt.Sprintf("user_events:%d", userID))),
+		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("🚫 Отмена", "cancel")),
 	)
 
 	return &result, nil
