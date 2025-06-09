@@ -15,17 +15,20 @@ func CancelCreate(bot *tgbotapi.BotAPI, update tgbotapi.Update, db database.Data
 		return
 	}
 
+	sendCanceledMessage(bot, update, db, cfg)
+	utils.DeleteAwaiting(update.CallbackQuery.From.ID)
+
 	ride, err := db.Ride.FindNoReadyRideByUser(update.CallbackQuery.From.ID)
 	if err != nil {
-		utils.DeleteAwaiting(update.CallbackQuery.From.ID)
 		return
 	}
 
 	db.Ride.DeleteRide(*ride)
-	utils.DeleteAwaiting(update.CallbackQuery.From.ID)
+}
 
+func sendCanceledMessage(bot *tgbotapi.BotAPI, update tgbotapi.Update, db database.Database, cfg config.Bot) {
 	text := `❌ Заезд удален`
-	msg := tgbotapi.NewMessage(chatID, text)
+	msg := tgbotapi.NewMessage(update.CallbackQuery.Message.Chat.ID, text)
 	msg.ParseMode = "HTML"
 
 	buttons, err := services.StartButtons(update.CallbackQuery.Message, db, cfg)
