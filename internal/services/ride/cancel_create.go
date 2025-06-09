@@ -6,8 +6,6 @@ import (
 	"goupride_bot/internal/services"
 	"goupride_bot/internal/utils"
 
-	"gorm.io/gorm"
-
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
@@ -18,7 +16,8 @@ func CancelCreate(bot *tgbotapi.BotAPI, update tgbotapi.Update, db database.Data
 	}
 
 	ride, err := db.Ride.FindNoReadyRideByUser(update.CallbackQuery.From.ID)
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil {
+		utils.DeleteAwaiting(update.CallbackQuery.From.ID)
 		return
 	}
 

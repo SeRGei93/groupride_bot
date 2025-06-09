@@ -1,7 +1,6 @@
 package services
 
 import (
-	"fmt"
 	"goupride_bot/internal/config"
 	"goupride_bot/internal/database"
 
@@ -9,13 +8,12 @@ import (
 )
 
 func StartButtons(message *tgbotapi.Message, db database.Database, cfg config.Bot) (*tgbotapi.InlineKeyboardMarkup, error) {
-	from := message.Chat
-	userID := from.ID
+	//userID := message.From.ID
 
 	result := tgbotapi.NewInlineKeyboardMarkup(
 		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("➕ Создать заезд", "create_ride")),
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonURL("🚴‍♂️ Канал со всеми заездами", "http://t.me/grouprideminsk")),
-		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("📋 Мои заезды", fmt.Sprintf("user_events:%d", userID))),
+		tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonURL("🚴‍♂️ Канал со всеми заездами", "http://t.me/groupride_by")),
+		//tgbotapi.NewInlineKeyboardRow(tgbotapi.NewInlineKeyboardButtonData("📋 Мои заезды", fmt.Sprintf("user_events:%d", userID))),
 	)
 
 	return &result, nil
