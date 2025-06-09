@@ -1,4 +1,4 @@
-APP_NAME = gravel
+APP_NAME = group-ride
 BUILD_DIR = build
 
 GOOS_MAC = darwin
